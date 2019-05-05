@@ -1,5 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyListener;
 
 public class Rocketship extends GameObject{
 		int x;
@@ -14,9 +17,11 @@ public class Rocketship extends GameObject{
 			width = _width;
 			height = _height;
 		}
-		void update()
+		void update(int xSpeed, int ySpeed)
 		{
-			
+			super.update();
+			x += xSpeed;
+			y += ySpeed;
 		}
 		void draw(Graphics g)
 		{

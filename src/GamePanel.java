@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
+	int xSpeed;
+	int ySpeed;
 	Timer timer;
 	GameObject obj;
+	ObjectManager om;
 	Font titleFont;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -24,6 +27,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		obj = new GameObject(10, 10, 100, 100);
 		titleFont = new Font("Arial",Font.PLAIN, 48);
 		rs = new Rocketship(250, 700, 50, 50);
+		om = new ObjectManager(rs);
 	}
 	void startGame()
 	{
@@ -35,7 +39,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	void updateGameState()
 	{
-		
+		om.update(xSpeed, ySpeed);
+		om.manageEnemies();
+		om.checkCollision();
+		om.purgeObjects();
 	}
 	void updateEndState()
 	{
@@ -53,6 +60,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	{
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		om.draw(g);
 	}
 	void drawEndState(Graphics g)
 	{
@@ -98,7 +106,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println("keyTyped");
+		
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -110,9 +118,28 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 				currentState = MENU_STATE;
 			}
 		}
+		if(e.getKeyCode() == 32)
+		{
+			om.addProjectile(new Projectile(rs.x + 20, rs.y, 10, 10));
+		}
+		if(e.getKeyChar() == 'a')
+			xSpeed = -5;
+		if(e.getKeyChar() == 'd')
+			xSpeed = 5;
+		if(e.getKeyChar() == 'w')
+			ySpeed = -5;
+		if(e.getKeyChar() == 's')
+			ySpeed = 5;
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("keyReleased");
+		if(e.getKeyChar() == 'a')
+			xSpeed = 0;
+		if(e.getKeyChar() == 'd')
+			xSpeed = 0;
+		if(e.getKeyChar() == 'w')
+			ySpeed = 0;
+		if(e.getKeyChar() == 's')
+			ySpeed = 0;
 	}
 }
