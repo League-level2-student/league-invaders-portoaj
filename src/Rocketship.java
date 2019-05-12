@@ -5,10 +5,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyListener;
 
 public class Rocketship extends GameObject{
-		int x;
-		int y;
-		int width;
-		int height;
+
 		
 		Rocketship(int _x, int _y, int _width, int _height) {
 			super(_x, _y, _width, _height);
@@ -25,7 +22,6 @@ public class Rocketship extends GameObject{
 		}
 		void draw(Graphics g)
 		{
-			g.setColor(Color.BLUE);
-			g.fillRect(x, y, width, height);
+			g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 		}
 	}

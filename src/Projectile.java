@@ -2,10 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Projectile extends GameObject{
-	int x;
-	int y;
-	int width;
-	int height;
+
 	int ySpeed;
 	Projectile(int _x, int _y, int _width, int _height) {
 		super(_x, _y, _width, _height);
@@ -24,7 +21,6 @@ public class Projectile extends GameObject{
 	}
 	void draw(Graphics g)
 	{
-		g.setColor(Color.WHITE);
-		g.fillRect(x, y, width, height);
+		g.drawImage(GamePanel.bulletImg, x, y, width, height, null);
 	}
 }

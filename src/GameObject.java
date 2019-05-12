@@ -1,4 +1,4 @@
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -16,7 +16,7 @@ public class GameObject {
 		y = _y;
 		width = _width;
 		height = _height;
-		collisionBox = new Rectangle();
+		collisionBox = new Rectangle(x,y,width,height);
 	}
 	void update()
 	{
